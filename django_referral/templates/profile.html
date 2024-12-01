@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block extend_title %}
+<title>Profile</title>
+{% endblock %}
+{% block extend_body %}
+<body>
+<h1>Welcome to your profile!</h1>
+<br/>
+<h3>Your referral code is - {{ referral_code }}</h3>
+
+<br/>
+{% if referred_user %}
+<h3>You already used this code - {{ referred_user }}</h3>
+{% endif %}
+{% if form %}
+<h3>Please, enter the referral code</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+  </form>
+{% endif %}
+{% if message %}
+{{ message }}
+{% endif %}
+</body>
+{% endblock %}
