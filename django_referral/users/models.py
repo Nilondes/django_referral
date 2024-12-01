@@ -12,8 +12,8 @@ class User(models.Model):
 
 
 class Referral(models.Model):
-    referral_code = models.ForeignKey(User, to_field='referral_code', on_delete=models.CASCADE, db_column='referral_code')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone = PhoneNumberField(null=False, blank=False, unique=True)
 
     def __str__(self):
-        return f'{self.referral_code}'
+        return f'{self.user}'

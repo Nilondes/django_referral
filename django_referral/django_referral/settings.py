@@ -33,7 +33,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'users',
-    "phonenumber_field",
+    'phonenumber_field',
+    'rest_framework',
+    'api',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

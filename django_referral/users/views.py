@@ -3,6 +3,7 @@ from .forms import PhoneForm, AuthNumberForm, ReferralCodeForm
 from .models import User, Referral
 from random import randint
 from django.core.exceptions import ObjectDoesNotExist
+from time import sleep
 
 
 def authenticate(request):
@@ -11,6 +12,7 @@ def authenticate(request):
         if form.is_valid():
             phone = form.cleaned_data['phone']
             auth_number = randint(1000, 9999)
+            sleep(2)
             try:
                 user = User.objects.get(phone=phone)
             except ObjectDoesNotExist:
@@ -54,9 +56,13 @@ def profile(request, pk):
                 message = 'There is no such referral code in database!'
                 context['form'] = form
             else:
-                referral = Referral.objects.create(referral_code=referred_user, phone=user.phone)
-                message = 'You have added a referral code!'
-                context['referred_user'] = referral.referral_code
+                if referral_code == user.referral_code:
+                    message = 'You cannot use your own referral code!'
+                    context['form'] = form
+                else:
+                    referral = Referral.objects.create(user=referred_user, phone=user.phone)
+                    message = 'You have added a referral code!'
+                    context['referred_user'] = referred_user.referral_code
             context['message'] = message
             return render(request, 'profile.html', context)
     else:
