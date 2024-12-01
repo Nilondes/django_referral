@@ -3,5 +3,5 @@ from .views import ReferralListView
 
 
 urlpatterns = [
-    path("referals/<int:pk>", ReferralListView.as_view())
+    path("referrals/<int:pk>", ReferralListView.as_view())
 ]
