@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block extend_title %}
+<title>Confirmation</title>
+{% endblock %}
+{% block extend_body %}
+<body>
+<h1>Please, enter the code from SMS</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+  </form>
+</br>
+(The authentication number from SMS - {{ auth_number }})
+</body>
+{% endblock %}
